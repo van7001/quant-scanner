@@ -53,6 +53,12 @@ async function scan(){
   const r = await fetch(API);
   const data = await r.json();
 
+  if (!data || data.length === 0) {
+    document.getElementById("status").innerText =
+      "⚠ Market API temporarily rate-limited. Try again after 1 minute.";
+    return;
+  }
+
   let picked=0;
   for(const s of data){
     if(picked===3)break;
